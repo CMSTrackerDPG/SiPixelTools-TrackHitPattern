@@ -1,7 +1,7 @@
 {
   "taskname": "Run3_10fb",
   "lumi": "certs/lumi_run3.txt",
-  "step": 1.0,
+  "step": 10.0,
   "runmin": 378981,
   "runmax": 403937,
   "dataset": "/ZeroBias/Run{year}*/AOD",
