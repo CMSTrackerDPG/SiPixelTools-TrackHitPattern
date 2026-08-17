@@ -25,6 +25,25 @@ cmsRun hitPatternFromAod_cfg.py \
     outputFileName=hitPattern.root maxEvents=-1
 ```
 
+## Batch
+
+Slurm, one job per run.
+
+```sh
+cd SiPixelTools/TrackHitPattern/batch
+./submit.py tasks/Run2026D.json --create
+./submit.py tasks/Run2026D.json --submit
+./submit.py tasks/Run2026D.json --status
+```
+
+`--create` queries DAS, shuffles the file list (fixed seed per run, so it is
+reproducible but not in lumisection order), and writes `job.sh`. A run is
+~0.2 CPU-hours and ~0.3 GB at 100k events.
+
+`tasks/` holds one config per era, 2025C–G and 2026B–D. Golden JSONs are in
+`certs/`; 2025 must use the combined `Cert_Collisions2025_Golden.json`, since
+the per-era files are missing runs.
+
 ## Output
 
 Two trees.
@@ -55,7 +74,7 @@ Bookkeeping with the cuts actually applied and counters.
 Applied here:
 
 | cut | default |
-|---|---|---|
+|---|---|
 | `highPurity`, `pt > 1`, `nstrip > 10` | on | 
 | good leading PV, `ndof >= 4`, \|z\| < 24, rho < 2, `ntrk > 10` | on |
 | \|d0\| < `d0Max` = 0.1 cm | on | 
