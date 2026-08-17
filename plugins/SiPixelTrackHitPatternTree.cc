@@ -130,7 +130,7 @@ SiPixelTrackHitPatternTree::SiPixelTrackHitPatternTree(const edm::ParameterSet& 
       dzMax_(iConfig.getParameter<double>("dzMax")) {
   usesResource("TFileService");
   edm::Service<TFileService> fs;
-  tree_ = fs->make<TTree>("hitPattern", "pixel hit pattern, one row per selected track");
+  tree_ = fs->make<TTree>("tracks", "pixel hit pattern, one row per selected track");
 
   tree_->Branch("run", &b_run_, "run/i");
   tree_->Branch("ls", &b_ls_, "ls/i");
