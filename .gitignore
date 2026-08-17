@@ -1,4 +1,8 @@
 *.root
 *.pyc
 __pycache__/
-batch/Run20*/
+batch/*/filelists/
+batch/*/logs/
+batch/*/job.sh
+batch/*/runlist.txt
+batch/*/runs.csv

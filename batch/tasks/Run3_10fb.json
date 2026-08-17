@@ -1,0 +1,17 @@
+{
+  "taskname": "Run3_10fb",
+  "lumi": "certs/lumi_run3.txt",
+  "step": 1.0,
+  "runmin": 378981,
+  "runmax": 403937,
+  "dataset": "/ZeroBias/Run{year}*/AOD",
+  "datasetFilter": "PromptReco",
+  "maxevents": 100000,
+  "maxconcurrent": 200,
+  "cert": {
+    "2024": "certs/Cert_Collisions2024_Golden.json",
+    "2025": "certs/Cert_Collisions2025_Golden.json",
+    "2026": "certs/Cert_Collisions2026_Golden.json"
+  },
+  "outdir": "/pnfs/psi.ch/cms/trivcat/store/user/mrogulji/PixelHitPattern/Run3_10fb"
+}

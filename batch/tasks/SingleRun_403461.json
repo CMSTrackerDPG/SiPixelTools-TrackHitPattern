@@ -1,0 +1,8 @@
+{
+  "taskname": "SingleRun_403461",
+  "sample": "/ZeroBias/Run2026D-PromptReco-v1/AOD",
+  "runs": [403461],
+  "maxevents": 100000,
+  "cert": "certs/Cert_Collisions2026_Golden.json",
+  "outdir": "/pnfs/psi.ch/cms/trivcat/store/user/mrogulji/PixelHitPattern/SingleRun_403461"
+}
