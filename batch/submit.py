@@ -52,7 +52,12 @@ export SCRAM_ARCH={scram_arch}
 source /cvmfs/cms.cern.ch/cmsset_default.sh
 cd {cmsswbase}/src
 eval `scramv1 runtime -sh`
-cd $TMPDIR
+
+# Work on node-local /scratch, not $TMPDIR.
+WORKDIR=/scratch/$USER/$SLURM_JOB_ID
+mkdir -p $WORKDIR
+trap '[ -n "$WORKDIR" ] && rm -f "$WORKDIR"/* && rmdir "$WORKDIR"' EXIT
+cd $WORKDIR
 
 cmsRun {cmsrun_cfg} \\
     lumiMask=$CERT \\
@@ -67,6 +72,7 @@ else
     mkdir -p {outdir}
     cp $OUTPUT {outdir}/$OUTPUT
 fi
+rm -f $OUTPUT
 """
 
 
@@ -112,6 +118,21 @@ def pick_runs(rows, step, runmin, runmax):
     return [p for p in picked if not (p["run"] in seen or seen.add(p["run"]))]
 
 
+def drop_uncertified(picked, cfg):
+    """Runs absent from the golden JSON yield an empty tree, so skip them."""
+    certs = cfg["cert"] if isinstance(cfg["cert"], dict) else None
+    if not certs:
+        return picked
+    good = []
+    for year, path in certs.items():
+        runs = set(json.load(open(resolve(path))))
+        good += [p for p in picked if p["year"] == year and str(p["run"]) in runs]
+    dropped = len(picked) - len(good)
+    if dropped:
+        print("  %d runs not in the golden JSON, dropped" % dropped)
+    return sorted(good, key=lambda p: p["run"])
+
+
 def resolve_datasets(picked, pattern, filt):
     """run -> dataset, one DAS call per candidate dataset rather than per run."""
     out = {}
@@ -138,6 +159,7 @@ def create(cfg, taskdir):
         picked = pick_runs(rows, float(cfg["step"]),
                            int(cfg.get("runmin", 0)), int(cfg.get("runmax", 10 ** 9)))
         print("  %d runs at every %g /fb" % (len(picked), float(cfg["step"])))
+        picked = drop_uncertified(picked, cfg)
         ds_of = resolve_datasets(picked, cfg.get("dataset", "/ZeroBias/Run{year}*/AOD"),
                                  cfg.get("datasetFilter", "PromptReco"))
         picked = [p for p in picked if p["run"] in ds_of]

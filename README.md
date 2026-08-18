@@ -46,9 +46,9 @@ the per-era files are missing runs.
 
 ## Output
 
-Two trees.
+Two trees, both in the `hitPattern` TDirectory.
 
-### `hitPattern` — one row per selected track
+### `hitPattern/tracks` — one row per selected track
 
 | branch | meaning |
 |---|---|
@@ -65,7 +65,7 @@ a track crossing a layer twice through a ladder overlap is not collapsed.
 
 Efficiency to be measured is `valid / (valid + missing)`.
 
-### `jobInfo` — one row per job
+### `hitPattern/jobInfo` — one row per job
 
 Bookkeeping with the cuts actually applied and counters.
 
