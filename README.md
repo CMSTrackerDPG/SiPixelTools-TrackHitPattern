@@ -30,19 +30,19 @@ cmsRun hitPatternFromAod_cfg.py \
 Slurm, one job per run.
 
 ```sh
+# Edit the tasks .json you want to run
 cd SiPixelTools/TrackHitPattern/batch
-./submit.py tasks/Run2026D.json --create
-./submit.py tasks/Run2026D.json --submit
-./submit.py tasks/Run2026D.json --status
+./submit.py tasks/Run3_1fb.json --create
+./submit.py tasks/Run3_1fb.json --submit
+./submit.py tasks/Run3_1fb.json --status
 ```
 
 `--create` queries DAS, shuffles the file list (fixed seed per run, so it is
 reproducible but not in lumisection order), and writes `job.sh`. A run is
 ~0.2 CPU-hours and ~0.3 GB at 100k events.
 
-`tasks/` holds one config per era, 2025C–G and 2026B–D. Golden JSONs are in
-`certs/`; 2025 must use the combined `Cert_Collisions2025_Golden.json`, since
-the per-era files are missing runs.
+Note that the current `Run3_1fb` uses ZeroBias Prompt AOD. Early 2024 datasets
+are stored on tape.
 
 ## Output
 
