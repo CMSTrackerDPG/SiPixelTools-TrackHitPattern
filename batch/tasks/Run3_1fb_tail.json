@@ -1,0 +1,10 @@
+{
+  "taskname": "Run3_1fb_tail",
+  "sample": "/ZeroBias/Run2026D-PromptReco-v1/AOD",
+  "runs": [403634, 403663, 403686, 403718, 403775, 403818],
+  "maxevents": 100000,
+  "maxconcurrent": 20,
+  "cert": "certs/Cert_Collisions2026_Golden.json",
+  "events_per_file": 9000,
+  "outdir": "/pnfs/psi.ch/cms/trivcat/store/user/mrogulji/PixelHitPattern/Run3_1fb"
+}
