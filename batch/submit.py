@@ -28,7 +28,7 @@ import sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 CFG = os.path.join(os.path.dirname(HERE), "test", "hitPatternFromAod_cfg.py")
 
-# Measured on one 2026 run
+# Measured on one 2026 run, might be out of date
 SEC_PER_EVENT = 0.0075
 KB_PER_EVENT = 3.2
 
@@ -53,11 +53,12 @@ source /cvmfs/cms.cern.ch/cmsset_default.sh
 cd {cmsswbase}/src
 eval `scramv1 runtime -sh`
 
-# Work on node-local /scratch, not $TMPDIR.
-WORKDIR=/scratch/$USER/$SLURM_JOB_ID
-mkdir -p $WORKDIR
-trap '[ -n "$WORKDIR" ] && rm -f "$WORKDIR"/* && rmdir "$WORKDIR"' EXIT
+# Work on node-local /scratch
+mkdir -p /scratch/$USER
+WORKDIR=$(mktemp -d /scratch/$USER/{taskname}_XXXXXXXX)
+trap 'cd /; rm -rf "$WORKDIR"' EXIT
 cd $WORKDIR
+export TMPDIR=$WORKDIR
 
 cmsRun {cmsrun_cfg} \\
     lumiMask=$CERT \\
@@ -72,7 +73,6 @@ else
     mkdir -p {outdir}
     cp $OUTPUT {outdir}/$OUTPUT
 fi
-rm -f $OUTPUT
 """
 
 

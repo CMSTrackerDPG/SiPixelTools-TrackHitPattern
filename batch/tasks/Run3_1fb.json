@@ -13,5 +13,6 @@
     "2025": "certs/Cert_Collisions2025_Golden.json",
     "2026": "certs/Cert_Collisions2026_Golden.json"
   },
-  "outdir": "/pnfs/psi.ch/cms/trivcat/store/user/mrogulji/PixelHitPattern/Run3_1fb"
+  "outdir": "/pnfs/psi.ch/cms/trivcat/store/user/mrogulji/PixelHitPattern/Run3_1fb",
+  "events_per_file": 9000
 }
