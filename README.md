@@ -38,8 +38,9 @@ cd SiPixelTools/TrackHitPattern/batch
 ```
 
 `--create` queries DAS, shuffles the file list (fixed seed per run, so it is
-reproducible but not in lumisection order), and writes `job.sh`. A run is
-~0.2 CPU-hours and ~0.3 GB at 100k events.
+reproducible but not in lumisection order), and writes `job.sh`. 
+A run is ~0.2 CPU-hours and ~0.3 GB at 100k events (this estimate is 
+outdated, wall-time is limited by network speed of reading the file(s)).
 
 Note that the current `Run3_1fb` uses ZeroBias Prompt AOD. Early 2024 datasets
 are stored on tape.
