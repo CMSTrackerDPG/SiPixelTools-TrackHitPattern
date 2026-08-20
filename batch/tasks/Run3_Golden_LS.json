@@ -1,0 +1,22 @@
+{
+  "taskname": "Run3_Golden_LS",
+  "backend": "condor",
+  "allcertified": true,
+  "lumi": "certs/lumi_run3.txt",
+  "runmin": 378981,
+  "runmax": 403937,
+  "dataset": "/ZeroBias/Run{year}*/AOD",
+  "datasetFilter": "PromptReco",
+  "maxevents": 30000,
+  "maxconcurrent": 100,
+  "flavour": "workday",
+  "events_per_file": 9000,
+  "cert": {
+    "2024": "certs/Cert_Collisions2024_Golden.json",
+    "2025": "certs/Cert_Collisions2025_Golden.json",
+    "2026": "certs/Cert_Collisions2026_Golden.json"
+  },
+  "outdir": "/eos/cms/store/group/dpg_tracker_pixel/comm_pixel/matej/efficiencies/Run3_Golden_LS",
+  "minls": 20,
+  "resume": true
+}
