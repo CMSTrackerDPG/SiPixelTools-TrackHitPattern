@@ -27,7 +27,8 @@ cmsRun hitPatternFromAod_cfg.py \
 
 ## Batch
 
-Slurm, one job per run.
+One job per run, on Slurm (PSI T3) or HTCondor (lxplus). Set
+`"backend": "condor"` in the task .json for the latter; Slurm is the default.
 
 ```sh
 # Edit the tasks .json you want to run
@@ -38,12 +39,16 @@ cd SiPixelTools/TrackHitPattern/batch
 ```
 
 `--create` queries DAS, shuffles the file list (fixed seed per run, so it is
-reproducible but not in lumisection order), and writes `job.sh`. 
+reproducible but not in lumisection order), and writes `job.sh` (plus `job.sub`
+for Condor).
 A run is ~0.2 CPU-hours and ~0.3 GB at 100k events (this estimate is 
 outdated, wall-time is limited by network speed of reading the file(s)).
 
-Note that the current `Run3_1fb` uses ZeroBias Prompt AOD. Early 2024 datasets
-are stored on tape.
+Runs whose dataset has no complete disk replica are dropped by `--create`,
+since a job reading them would only wait on tape. 
+[26/08/20] For the golden runs of 2024--2026 that costs 55 of 1093 runs: 
+`Run2024B`, `Run2025B` and `Run2026A`
+Prompt AOD are tape-only, and no reprocessed AOD exists for them.
 
 ## Output
 
